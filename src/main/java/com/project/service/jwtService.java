@@ -11,6 +11,8 @@ import java.util.function.Function;
 import java.util.Date;
 import javax.crypto.SecretKey;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 public class jwtService {
 
   private final String SECRET_KEY =
@@ -18,6 +20,19 @@ public class jwtService {
 
     public String extractUsername(String token){
         return extractClaims(token, Claims::getSubject);
+    }
+
+    public boolean valid(String token, UserDetails user){
+        String username = extractUsername(token);
+        return (username.equals(user.getUsername())) && !isTokenExpired(token);
+    }
+
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    private Date extractExpiration(String token) {
+        return extractClaims(token, Claims::getExpiration);
     }
 
     public <T> T extractClaims(String token, Function<Claims, T> resolver){
