@@ -6,7 +6,7 @@ Spring:
   datasource:
     url: jdbc:mysql://localhost:3306/spring_jwt
     username: root
-    password: 1234
+    password: Rahulgupta21
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
