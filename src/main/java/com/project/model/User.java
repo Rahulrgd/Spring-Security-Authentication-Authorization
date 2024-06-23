@@ -1,107 +1,117 @@
 package com.project.model;
 
 import jakarta.persistence.*;
+import java.util.Collection;
+import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-
 @Entity
 @Table(name = "user")
-public class User implements UserDetails{
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+public class User implements UserDetails {
 
-    @Column(name = "first_name")
-    private String firstName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Integer id;
 
-    @Column(name = "last_name")
-    private String lastName;
+  @Column(name = "first_name")
+  private String firstName;
 
-    @Column(name = "username")
-    private String username;
+  @Column(name = "last_name")
+  private String lastName;
 
-    @Column(name = "password")
-    private String password;
+  @Column(name = "username")
+  private String username;
 
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
+  @Column(name = "password")
+  private String password;
 
-    public Integer getId() {
-        return id;
-    }
+  @Enumerated(value = EnumType.STRING)
+  private Role role;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  @OneToMany(mappedBy = "user")
+  private List<Token> tokens;
 
-    public String getFirstName() {
-        return firstName;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return List.of(new SimpleGrantedAuthority(role.name()));
+  }
 
-    public Role getRole() {
-        return role;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
+  public List<Token> getTokens() {
+    return tokens;
+  }
+
+  public void setTokens(List<Token> tokens) {
+    this.tokens = tokens;
+  }
 }
