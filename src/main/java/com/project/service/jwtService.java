@@ -12,7 +12,9 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
+@Service
 public class jwtService {
 
   private final String SECRET_KEY =
@@ -22,7 +24,7 @@ public class jwtService {
         return extractClaims(token, Claims::getSubject);
     }
 
-    public boolean valid(String token, UserDetails user){
+    public boolean isValid(String token, UserDetails user){
         String username = extractUsername(token);
         return (username.equals(user.getUsername())) && !isTokenExpired(token);
     }
