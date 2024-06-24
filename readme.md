@@ -51,3 +51,26 @@ Follow these steps:
    ```
 
 The application will be available at [http://localhost:8080](http://localhost:8080).
+
+# Authentication Api's:
+
+- http://localhost:8080/register
+
+```
+{
+  "firstname":"Rahul",
+  "lastname":"Gupta",
+  "username":"rahulrgd21",
+  "password":"12345678",
+  "role":"USER"
+}
+```
+
+- http://localhost:8080/login
+
+```
+{ 
+"username":"rahulrgd21", 
+"password":"12345678"
+}
+```
